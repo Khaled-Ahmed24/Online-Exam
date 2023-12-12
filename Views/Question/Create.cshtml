@@ -1,0 +1,66 @@
+﻿@model Online_Exam1._0.Models.Questions
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Questions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Question_title" class="control-label"></label>
+                <input asp-for="Question_title" class="form-control" />
+                <span asp-validation-for="Question_title" class="text-danger"></span>
+            </div>
+
+            <!-- Dropdown list for Question_type -->
+            <div class="form-group">
+                <label asp-for="Question_type" class="control-label"></label>
+                <select asp-for="Question_type" class="form-control">
+                    <option value="">Choose Question Type</option>
+                    <option value="MultipleChoice">Multiple Choice</option>
+                    <option value="TrueFalse">True or False</option>
+                    <option value="CheckBox">CheckBox</option>
+                </select>
+                <span asp-validation-for="Question_type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Points" class="control-label"></label>
+                <input asp-for="Points" class="form-control" />
+                <span asp-validation-for="Points" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Is_required" /> @Html.DisplayNameFor(model => model.Is_required)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <form asp-controller="Exam" asp-action="Finish">
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>@ViewBag.msg</p>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
